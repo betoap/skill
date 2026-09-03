@@ -2,7 +2,7 @@
 
 O fluxo é um grafo dirigido de nós especializados, não um prompt linear. As arestas só podem ser percorridas quando sua condição estiver comprovada pelos artefatos de saída e pelo [protocolo de evidências](evidence-protocol.md).
 
-No início de uma demanda, crie ou atualize `.alpha-masters/workflow-state.yaml` no projeto atendido a partir do [template](workflow-state.template.yaml). Registre demanda, nó atual, artefatos disponíveis, checks, evidências, última transição e bloqueios. Mantenha somente estado operacional verificável.
+No início de uma demanda, crie ou atualize `.fio/workflow-state.yaml` no projeto atendido a partir do [template](workflow-state.template.yaml). Registre demanda, nó atual, artefatos disponíveis, checks, evidências, última transição e bloqueios. Mantenha somente estado operacional verificável.
 
 Depois que ChefIA definir a demanda, o estado deve registrar `plan_directory` e `master_plan_path`, apontando para `/plan/{demanda}/` e `/plan/{demanda}/{demanda}.md`. As listas `requirements`, `tasks`, `checks` e `workstreams` começam vazias e só recebem registros reais. Mantenha uma entrada por requisito com seu `REQ-n`, status e tasks vinculadas; uma entrada por task com seu `TASK-n`, caminho, requisitos cobertos, status e checks de fase; e uma entrada por check com status, responsável e evidência. Ao delegar trabalho paralelo, registre em `workstreams` o responsável, fase, task ou cenários atribuídos, arquivos ou módulos, dependências, status e evidências. O estado não substitui os documentos de checklist: ele deve apontar para eles e reproduzir apenas o estado necessário para auditar a transição.
 

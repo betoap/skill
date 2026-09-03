@@ -1,9 +1,9 @@
 ---
-name: alpha-masters
-description: Conduz uma feature de software da descoberta à validação final, combinando arquitetura, TDD, implementação e controle de evidências. Use para executar ou retomar o fluxo completo de uma feature.
+name: fio
+description: Fluxo de Implementação Orientada para conduzir uma feature da descoberta à validação final, combinando arquitetura, TDD, implementação e controle de evidências. Use para executar ou retomar o fluxo completo de uma feature.
 ---
 
-# Alpha Masters
+# FIO — Fluxo de Implementação Orientada
 
 Conduza a demanda como um grafo de trabalho auditável. Esta é uma skill única, mas cada fase mantém os limites de responsabilidade originais: descoberta e orquestração (ChefIA), arquitetura e plano (MaestrIA), desenho/validação de testes (ConfIA) e implementação (CodIA). Não omita fases, nem faça uma fase assumir responsabilidades de outra.
 

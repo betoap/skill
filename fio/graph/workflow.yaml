@@ -1,37 +1,37 @@
 version: 2
-name: alpha-masters-tdd
-state_file: .alpha-masters/workflow-state.yaml
+name: fio-tdd
+state_file: .fio/workflow-state.yaml
 contracts: graph/artifact-contracts.md
 evidence_protocol: graph/evidence-protocol.md
 
 nodes:
   chefia_discovery:
-    skill: alpha-masters
+    skill: fio
     phase: chefia_discovery
     input: [user_request]
     output: [approved_specification, master_plan_checklist]
   maestria_architecture:
-    skill: alpha-masters
+    skill: fio
     phase: maestria_architecture
     input: [approved_specification, master_plan_checklist, project_context]
     output: [technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists]
   confia_test_design:
-    skill: alpha-masters
+    skill: fio
     phase: confia_test_design
     input: [approved_specification, technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists]
     output: [test_strategy, traceability_matrix, test_suite, baseline_evidence, red_test_evidence]
   codia_implementation:
-    skill: alpha-masters
+    skill: fio
     phase: codia_implementation
     input: [approved_specification, technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists, traceability_matrix, test_suite, baseline_evidence, red_test_evidence]
     output: [implementation_evidence, updated_checklist]
   confia_validation:
-    skill: alpha-masters
+    skill: fio
     phase: confia_validation
     input: [approved_specification, technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists, traceability_matrix, test_suite, baseline_evidence, red_test_evidence, implementation_evidence, updated_checklist]
     output: [validation_report, technically_validated_checklist]
   chefia_delivery:
-    skill: alpha-masters
+    skill: fio
     phase: chefia_delivery
     input: [approved_specification, master_plan_checklist, task_checklists, validation_report, technically_validated_checklist]
     output: [delivery_report, finalized_checklist, next_steps]
