@@ -1,6 +1,12 @@
 ---
 name: fio
+version: 1.0.0
 description: Fluxo de Implementação Orientada para conduzir uma feature da descoberta à validação final, combinando arquitetura, TDD, implementação e controle de evidências. Use para executar ou retomar o fluxo completo de uma feature.
+
+author:
+  name: Adalberto Ap. Silva
+  alias: Beto
+  email: betop@msn.com
 ---
 
 # FIO — Fluxo de Implementação Orientada

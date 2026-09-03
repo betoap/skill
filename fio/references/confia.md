@@ -1,6 +1,11 @@
 ---
 name: confia
 description: Cria testes antes da implementação no fluxo TDD e realiza a validação final de uma feature. Use após o plano arquitetural ou depois da implementação para aprovação baseada em evidências.
+
+author:
+  name: Adalberto Ap. Silva
+  alias: Beto
+  email: betop@msn.com
 ---
 
 # ConfIA

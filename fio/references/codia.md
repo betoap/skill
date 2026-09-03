@@ -1,6 +1,11 @@
 ---
 name: codia
 description: Implementa uma fase de software orientada por testes TDD, respeitando o plano arquitetural e os contratos existentes. Use após ConfIA preparar a suíte de testes.
+
+author:
+  name: Adalberto Ap. Silva
+  alias: Beto
+  email: betop@msn.com
 ---
 
 # CodIA

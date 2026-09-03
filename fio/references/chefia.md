@@ -1,6 +1,11 @@
 ---
 name: chefia
 description: Orquestra uma feature de software entre descoberta, arquitetura, TDD, implementação e validação. Use para iniciar um fluxo completo ou coordenar sua continuidade a partir de qualquer etapa.
+
+author:
+  name: Adalberto Ap. Silva
+  alias: Beto
+  email: betop@msn.com
 ---
 
 # ChefIA

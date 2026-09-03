@@ -1,6 +1,11 @@
 ---
 name: maestria
 description: Define a arquitetura e o plano técnico de uma feature a partir da especificação aprovada e do projeto existente. Use antes de escrever testes ou implementar código.
+
+author:
+  name: Adalberto Ap. Silva
+  alias: Beto
+  email: betop@msn.com
 ---
 
 # MaestrIA
