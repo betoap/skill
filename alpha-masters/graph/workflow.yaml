@@ -1,0 +1,76 @@
+version: 2
+name: alpha-masters-tdd
+state_file: .alpha-masters/workflow-state.yaml
+contracts: graph/artifact-contracts.md
+evidence_protocol: graph/evidence-protocol.md
+
+nodes:
+  chefia_discovery:
+    skill: alpha-masters
+    phase: chefia_discovery
+    input: [user_request]
+    output: [approved_specification, master_plan_checklist]
+  maestria_architecture:
+    skill: alpha-masters
+    phase: maestria_architecture
+    input: [approved_specification, master_plan_checklist, project_context]
+    output: [technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists]
+  confia_test_design:
+    skill: alpha-masters
+    phase: confia_test_design
+    input: [approved_specification, technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists]
+    output: [test_strategy, traceability_matrix, test_suite, baseline_evidence, red_test_evidence]
+  codia_implementation:
+    skill: alpha-masters
+    phase: codia_implementation
+    input: [approved_specification, technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists, traceability_matrix, test_suite, baseline_evidence, red_test_evidence]
+    output: [implementation_evidence, updated_checklist]
+  confia_validation:
+    skill: alpha-masters
+    phase: confia_validation
+    input: [approved_specification, technology_profile, architecture_decisions, implementation_plan, task_contracts, task_checklists, traceability_matrix, test_suite, baseline_evidence, red_test_evidence, implementation_evidence, updated_checklist]
+    output: [validation_report, technically_validated_checklist]
+  chefia_delivery:
+    skill: alpha-masters
+    phase: chefia_delivery
+    input: [approved_specification, master_plan_checklist, task_checklists, validation_report, technically_validated_checklist]
+    output: [delivery_report, finalized_checklist, next_steps]
+
+edges:
+  - { from: chefia_discovery, to: maestria_architecture, when: specification_confirmed }
+  - { from: maestria_architecture, to: confia_test_design, when: architecture_and_plan_complete }
+  - { from: confia_test_design, to: chefia_discovery, when: specification_clarification_required }
+  - { from: confia_test_design, to: maestria_architecture, when: architecture_or_contract_correction_required }
+  - { from: confia_test_design, to: codia_implementation, when: baseline_green_and_tests_red_for_expected_reason }
+  - { from: codia_implementation, to: chefia_discovery, when: specification_clarification_required }
+  - { from: codia_implementation, to: maestria_architecture, when: architecture_or_contract_correction_required }
+  - { from: codia_implementation, to: confia_test_design, when: test_design_correction_required }
+  - { from: codia_implementation, to: confia_validation, when: implementation_complete_with_evidence }
+  - { from: confia_validation, to: chefia_delivery, when: validation_approved_with_traceability }
+  - { from: confia_validation, to: codia_implementation, when: implementation_correction_required }
+  - { from: confia_validation, to: maestria_architecture, when: architecture_correction_required }
+  - { from: confia_validation, to: chefia_discovery, when: specification_clarification_required }
+
+invariants:
+  - A node starts only when every declared input artifact is present, current and passes its contract.
+  - Every artifact records identifier, producer, status, source evidence, unknowns and creation context.
+  - State is updated before a transition and records the selected edge, its guard evidence and invalidated artifacts.
+  - After a demand is named, state records its plan directory and master-plan path, each REQ-n with linked tasks, each TASK-n with its path and phase checks, and the evidence for each check.
+  - Before a transition, state must reconcile with the master plan and task files; missing paths or divergent requirements, checks, statuses or evidence block the transition.
+  - A node cannot complete without every declared output artifact and its required evidence.
+  - ChefIA discovery creates a draft master plan at `/plan/{demanda}/{demanda}.md` before the first interview question. It cannot transition until that same plan is confirmed, lists every confirmed REQ-n as pending and does not reuse an unrelated document.
+  - ChefIA discovery asks one objective question at a time and records each question and answer in the master plan before asking the next; the approved specification preserves that interview record.
+  - MaestrIA cannot transition without task checklists at `/plan/{demanda}/taskNN.md`, each linked from the master plan; every REQ-n must be covered by at least one task and every task must expose all mandatory phase checks.
+  - A phase, task or delivery cannot be called complete when its corresponding checklist item is absent, stale or lacks observable evidence.
+  - When ConfIA rejects a task, it must reopen every invalidated checklist item and its corresponding master-plan task item, then record the failure reason, evidence and responsible corrective action in that task before taking a return edge.
+  - A resolved validation failure remains recorded in the task with status resolved; its reason, evidence and responsible corrective action must not be removed.
+  - A corrected task must return to ConfIA for a new technical validation; its master-plan item may be checked again only after ChefIA completes the final double check.
+  - ChefIA may check a REQ-n only when every task linked to it has completed the final double check; reopening a linked task reopens that REQ-n.
+  - No test may be called red or green without command output or an equivalent observable execution record.
+  - When a task has an approved visual reference, ConfIA cannot approve it without side-by-side comparison evidence showing full adherence to every approved visual aspect; any divergence reopens the task for correction.
+  - Baseline tests must pass before new TDD tests may be attributed to missing functionality.
+  - A failed validation follows one explicit return edge and reopens only affected checks.
+  - Approval requires complete requirement-to-test traceability and an independent final review against the approved specification.
+  - Delivery requires a ChefIA double check confirming ConfIA technical approval, complete evidence, scope integrity and no material blocker. Only after that check may ChefIA promote remaining mandatory task checks to validated and communicate success.
+  - CodIA and ConfIA may delegate independent work in parallel, but a phase coordinator must record ownership and scope, integrate outputs, reconcile shared artifacts and update the authoritative checklists and state.
+  - Parallel work must not overlap files, tasks or checklist ownership unless an explicit integration plan exists; a worker may not approve its own implementation.

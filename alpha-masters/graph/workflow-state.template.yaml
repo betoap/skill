@@ -1,0 +1,21 @@
+demand:
+  id: ""
+  title: ""
+  plan_directory: ""
+  master_plan_path: ""
+  entry_node: ""
+  current_node: ""
+  status: active
+artifacts: []
+requirements: []
+tasks: []
+checks: []
+workstreams: []
+transitions:
+  - from: ""
+    to: ""
+    guard: ""
+    evidence: []
+    invalidated_artifacts: []
+blockers: []
+unknowns: []
