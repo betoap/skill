@@ -1,6 +1,6 @@
 ---
 name: fio
-version: 1.0.0
+version: 1.1.0
 description: Fluxo de Implementação Orientada para conduzir uma feature da descoberta à validação final, combinando arquitetura, TDD, implementação e controle de evidências. Use para executar ou retomar o fluxo completo de uma feature.
 
 author:
@@ -11,13 +11,17 @@ author:
 
 # FIO — Fluxo de Implementação Orientada
 
+## Distribuição e versão
+
+Esta pasta é a fonte canônica da FIO. Ambientes de execução devem referenciá-la diretamente, preferencialmente por link simbólico, e nunca manter uma cópia editável independente. Antes de iniciar uma demanda, registre no estado `skill_name`, `skill_version` e `skill_source`; se a versão ou a origem em uso não puderem ser verificadas, bloqueie o fluxo antes da descoberta. Uma atualização da skill é concluída somente quando o ambiente de execução volta a resolver para esta mesma fonte canônica.
+
 Conduza a demanda como um grafo de trabalho auditável. Esta é uma skill única, mas cada fase mantém os limites de responsabilidade originais: descoberta e orquestração (ChefIA), arquitetura e plano (MaestrIA), desenho/validação de testes (ConfIA) e implementação (CodIA). Não omita fases, nem faça uma fase assumir responsabilidades de outra.
 
 ## Preparação obrigatória
 
 Antes de atuar, leia o [contrato do grafo](graph/README.md), os [contratos de artefatos](graph/artifact-contracts.md), o [protocolo de evidências](graph/evidence-protocol.md) e o [grafo de workflow](graph/workflow.yaml). Crie ou atualize o estado da demanda conforme definido no contrato do grafo. O grafo é a fonte de verdade para nós, artefatos, condições de transição, retornos e invariantes.
 
-Identifique o ponto de entrada. Só inicie uma fase quando todos os artefatos declarados para ela estiverem presentes, atuais e aderentes aos seus contratos. Quando uma entrada parcial for válida, registre as dependências assumidas e os riscos das etapas puladas; quando não for válida, redirecione ao nó produtor. Antes de cada transição, atualize o estado compartilhado e registre a evidência da condição da aresta. Reconcilie o estado com o plano-mestre e as tasks antes de transicionar: caminhos, requisitos, checks, status e evidências devem coincidir.
+Identifique o ponto de entrada. Só inicie uma fase quando todos os artefatos declarados para ela estiverem presentes, atuais e aderentes aos seus contratos. Quando uma entrada parcial for válida, registre as dependências assumidas e os riscos das etapas puladas; quando não for válida, redirecione ao nó produtor. Antes de cada transição, atualize o estado compartilhado e registre a evidência da condição da aresta. Reconcilie o estado com o plano-mestre e as tasks antes de transicionar: caminhos, requisitos, checks, status e evidências devem coincidir. Registre cada artefato declarado como entrada ou saída de um nó de forma estruturada no estado, incluindo identificador, produtor, status, caminho ou referência, contexto de criação, incertezas e evidências observáveis. Registre também cada check de fase individualmente, com task, responsável, status e evidência. Texto livre em uma transição não substitui esses registros.
 
 ## Plano por demanda
 

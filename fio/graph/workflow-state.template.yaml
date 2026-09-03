@@ -6,11 +6,16 @@ demand:
   entry_node: ""
   current_node: ""
   status: active
+skill:
+  name: fio
+  version: ""
+  source: ""
 artifacts: []
 requirements: []
 tasks: []
 checks: []
 workstreams: []
+known_baseline_failures: []
 transitions:
   - from: ""
     to: ""

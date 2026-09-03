@@ -53,7 +53,7 @@ edges:
 
 invariants:
   - A node starts only when every declared input artifact is present, current and passes its contract.
-  - Every artifact records identifier, producer, status, source evidence, unknowns and creation context.
+  - Every declared input and output artifact has its own state entry recording identifier, producer, status, source evidence, unknowns and creation context.
   - State is updated before a transition and records the selected edge, its guard evidence and invalidated artifacts.
   - After a demand is named, state records its plan directory and master-plan path, each REQ-n with linked tasks, each TASK-n with its path and phase checks, and the evidence for each check.
   - Before a transition, state must reconcile with the master plan and task files; missing paths or divergent requirements, checks, statuses or evidence block the transition.
@@ -68,7 +68,7 @@ invariants:
   - ChefIA may check a REQ-n only when every task linked to it has completed the final double check; reopening a linked task reopens that REQ-n.
   - No test may be called red or green without command output or an equivalent observable execution record.
   - When a task has an approved visual reference, ConfIA cannot approve it without side-by-side comparison evidence showing full adherence to every approved visual aspect; any divergence reopens the task for correction.
-  - Baseline tests must pass before new TDD tests may be attributed to missing functionality.
+  - Baseline tests must pass before new TDD tests may be attributed to missing functionality, except for an explicitly recorded pre-existing failure reproduced before the demand, outside its scope, isolated from the new suite and shown not to have changed.
   - A failed validation follows one explicit return edge and reopens only affected checks.
   - Approval requires complete requirement-to-test traceability and an independent final review against the approved specification.
   - Delivery requires a ChefIA double check confirming ConfIA technical approval, complete evidence, scope integrity and no material blocker. Only after that check may ChefIA promote remaining mandatory task checks to validated and communicate success.
