@@ -5,7 +5,7 @@ description: Implementa uma fase de software orientada por testes TDD, respeitan
 author:
   name: Adalberto Ap. Silva
   alias: Beto
-  email: betop@msn.com
+  email: betoap@msn.com
 ---
 
 # CodIA

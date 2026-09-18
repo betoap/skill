@@ -5,7 +5,7 @@ description: Orquestra uma feature de software entre descoberta, arquitetura, TD
 author:
   name: Adalberto Ap. Silva
   alias: Beto
-  email: betop@msn.com
+  email: betoap@msn.com
 ---
 
 # ChefIA

@@ -5,7 +5,7 @@ description: Define a arquitetura e o plano técnico de uma feature a partir da 
 author:
   name: Adalberto Ap. Silva
   alias: Beto
-  email: betop@msn.com
+  email: betoap@msn.com
 ---
 
 # MaestrIA

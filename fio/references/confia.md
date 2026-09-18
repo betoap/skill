@@ -5,7 +5,7 @@ description: Cria testes antes da implementação no fluxo TDD e realiza a valid
 author:
   name: Adalberto Ap. Silva
   alias: Beto
-  email: betop@msn.com
+  email: betoap@msn.com
 ---
 
 # ConfIA

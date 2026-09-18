@@ -6,7 +6,7 @@ description: Fluxo de Implementação Orientada para conduzir uma feature da des
 author:
   name: Adalberto Ap. Silva
   alias: Beto
-  email: betop@msn.com
+  email: betoap@msn.com
 ---
 
 # FIO — Fluxo de Implementação Orientada
