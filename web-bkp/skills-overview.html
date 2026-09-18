@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visão geral das skills</title>
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #56637a;
+        --paper: #f7f8fb;
+        --card: #ffffff;
+        --line: #dfe5ef;
+        --cim: #4338ca;
+        --sim: #0369a1;
+        --fio: #047857;
+        --dio: #b45309;
+        --warning-bg: #fff7e8;
+        --warning-line: #f0bd62;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+      main { max-width: 1100px; margin: 0 auto; padding: 56px 28px 72px; }
+      .eyebrow { color: var(--cim); font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+      h1 { max-width: 760px; margin: 10px 0 14px; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.08; letter-spacing: -.04em; }
+      h2 { margin: 52px 0 18px; font-size: 1.45rem; letter-spacing: -.02em; }
+      .lead { max-width: 720px; color: var(--muted); font-size: 1.13rem; }
+      .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 30px; }
+      .card-link { color: inherit; text-decoration: none; }
+      .card-link:hover .card { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(24, 37, 59, .09); }
+      .card { min-height: 250px; padding: 22px; border: 1px solid var(--line); border-top: 5px solid var(--accent); border-radius: 14px; background: var(--card); box-shadow: 0 8px 24px rgba(24, 37, 59, .05); }
+      .card h3 { margin: 0 0 5px; font-size: 1.45rem; }
+      .card .name { min-height: 50px; color: var(--accent); font-size: .86rem; font-weight: 700; }
+      .card p { margin: 18px 0 0; color: var(--muted); font-size: .95rem; }
+      .cim { --accent: var(--cim); }
+      .sim { --accent: var(--sim); }
+      .fio { --accent: var(--fio); }
+      .dio { --accent: var(--dio); }
+      .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 10px; align-items: center; margin: 26px 0 12px; }
+      .flow-node { min-height: 150px; padding: 18px; border-radius: 12px; color: white; }
+      .flow-node strong { display: block; margin-bottom: 7px; font-size: 1.15rem; }
+      .flow-node span { display: block; font-size: .9rem; opacity: .9; }
+      .flow-node.cim { background: var(--cim); }
+      .flow-node.sim { background: var(--sim); }
+      .flow-node.fio { background: var(--fio); }
+      .flow-node.dio { background: var(--dio); }
+      .arrow { color: var(--muted); font-size: 1.7rem; font-weight: 300; }
+      .return { max-width: 450px; margin: 16px auto 0; padding: 12px 16px; border: 1px dashed #afb9ca; border-radius: 10px; color: var(--muted); text-align: center; font-size: .92rem; }
+      .integration-link { display: inline-block; margin: 18px 0 2px; padding: 10px 14px; border-radius: 8px; background: #eeecff; color: var(--cim); font-weight: 700; text-decoration: none; }
+      .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+      .step { padding: 18px; border-left: 3px solid var(--line); background: rgba(255,255,255,.62); }
+      .step b { display: block; margin-bottom: 6px; color: var(--ink); }
+      .step span { color: var(--muted); font-size: .93rem; }
+      .status { margin-top: 42px; padding: 22px 24px; border: 1px solid var(--warning-line); border-radius: 12px; background: var(--warning-bg); }
+      .status h2 { margin: 0 0 8px; font-size: 1.14rem; }
+      .status p { margin: 0; color: #704b12; }
+      .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .rule { padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+      .rule h3 { margin: 0 0 8px; font-size: 1rem; }
+      .rule p { margin: 0; color: var(--muted); font-size: .94rem; }
+      .requests { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .request { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+      .request h3 { margin: 0 0 6px; font-size: 1.1rem; }
+      .request .when { margin: 0 0 14px; color: var(--muted); font-size: .91rem; }
+      .request code { display: block; padding: 12px; border-radius: 8px; background: #eef2f8; color: #26354d; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .84rem; white-space: pre-wrap; }
+      .request.cim-request { grid-column: 1 / -1; border-color: color-mix(in srgb, var(--cim) 35%, var(--line)); }
+      footer { margin-top: 56px; color: var(--muted); font-size: .85rem; }
+      @media (max-width: 900px) {
+        .cards, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .flow { grid-template-columns: 1fr auto 1fr; }
+        .flow-node.dio { grid-column: 2; }
+        .flow .arrow:nth-of-type(2) { display: none; }
+      }
+      @media (max-width: 580px) {
+        main { padding: 36px 18px 54px; }
+        .cards, .steps, .rules { grid-template-columns: 1fr; }
+        .flow { grid-template-columns: 1fr; }
+        .flow-node.dio { grid-column: auto; }
+        .arrow { display: block !important; transform: rotate(90deg); text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">Visão de produto e execução</div>
+      <h1>O ciclo de mudança do produto</h1>
+      <p class="lead">Quatro skills com responsabilidades separadas: uma interpreta a mudança, uma implementa, uma confirma o estado real do projeto e uma mantém o ciclo rastreável.</p>
+
+      <section aria-labelledby="skills-title">
+        <h2 id="skills-title">As quatro skills</h2>
+        <div class="cards">
+          <a class="card-link" href="cim.html"><article class="card cim">
+            <h3>CIM</h3>
+            <div class="name">Ciclo Integrado de Mudanças</div>
+            <p>Coordena o fluxo entre as outras skills, mantém o identificador comum, registra o estado do ciclo e controla retornos, bloqueios e encerramento.</p>
+          </article></a>
+          <a class="card-link" href="sim.html"><article class="card sim">
+            <h3>SIM</h3>
+            <div class="name">Solicitação Incremental de Mudança</div>
+            <p>Interpreta a solicitação, consulta o conhecimento existente e registra o impacto como comportamento esperado ou planejado.</p>
+          </article></a>
+          <a class="card-link" href="fio.html"><article class="card fio">
+            <h3>FIO</h3>
+            <div class="name">Fluxo de Implementação Orientada</div>
+            <p>Esclarece o escopo, planeja, desenha testes, implementa e realiza a validação técnica independente da mudança.</p>
+          </article></a>
+          <a class="card-link" href="dio.html"><article class="card dio">
+            <h3>DIO</h3>
+            <div class="name">Documentação Inicial Obsidian</div>
+            <p>Analisa o repositório e mantém a baseline AS-IS: aquilo que existe de fato na implementação e no conhecimento do projeto.</p>
+          </article></a>
+        </div>
+      </section>
+
+      <section aria-labelledby="flow-title">
+        <h2 id="flow-title">Como o ciclo funciona</h2>
+        <div class="flow" aria-label="CIM encaminha a solicitação para SIM, depois FIO, depois DIO">
+          <div class="flow-node cim"><strong>CIM</strong><span>Cria e acompanha o ciclo da mudança.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="flow-node sim"><strong>SIM</strong><span>Converte a solicitação em conhecimento esperado.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="flow-node fio"><strong>FIO</strong><span>Planeja, implementa e valida tecnicamente.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="flow-node dio"><strong>DIO</strong><span>Observa o repositório e confirma o AS-IS.</span></div>
+        </div>
+        <div class="return">A DIO devolve o resultado para a CIM, que encerra o ciclo ou retorna somente à etapa que precisa de correção.</div>
+        <a class="integration-link" href="handoffs.html">Ver os contratos de integração entre as skills →</a>
+      </section>
+
+      <section aria-labelledby="meaning-title">
+        <h2 id="meaning-title">O significado de cada etapa</h2>
+        <div class="steps">
+          <div class="step"><b>1. Proposta</b><span>A solicitação chega como texto e representa uma mudança desejada, não uma mudança já realizada.</span></div>
+          <div class="step"><b>2. Conhecimento esperado</b><span>A SIM organiza regras, fluxos e impactos esperados, sem alterar o conhecimento atual.</span></div>
+          <div class="step"><b>3. Entrega técnica</b><span>A FIO confirma o escopo, executa TDD, implementação e validação com evidências.</span></div>
+          <div class="step"><b>4. Confirmação AS-IS</b><span>A DIO observa o repositório. Só então o esperado pode ser confirmado como comportamento atual.</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="rules-title">
+        <h2 id="rules-title">Regras que evitam conflito</h2>
+        <div class="rules">
+          <article class="rule"><h3>Esperado não é atual</h3><p>A SIM não pode promover uma solicitação a AS-IS. Uma mudança proposta permanece esperada ou planejada até existir evidência no repositório.</p></article>
+          <article class="rule"><h3>Entrega técnica não encerra sozinha</h3><p>A validação da FIO é necessária, mas a confirmação final depende da observação da DIO sobre o repositório.</p></article>
+          <article class="rule"><h3>Cada skill preserva seu papel</h3><p>A CIM não implementa, a SIM não confirma AS-IS, a FIO não atualiza a baseline e a DIO não substitui a validação técnica.</p></article>
+          <article class="rule"><h3>Erros retornam ao ponto certo</h3><p>Quando há ambiguidade, escopo alterado ou implementação não confirmada, o ciclo reabre apenas a etapa afetada e preserva a rastreabilidade.</p></article>
+        </div>
+      </section>
+
+      <section aria-labelledby="requests-title">
+        <h2 id="requests-title">Como solicitar cada skill</h2>
+        <div class="requests">
+          <article class="request">
+            <h3>DIO</h3>
+            <p class="when">Use quando precisar criar ou revalidar a visão AS-IS de um projeto já existente.</p>
+            <code>Use a DIO para analisar este projeto e criar ou atualizar a baseline de conhecimento no Obsidian. O projeto está em [caminho]. O vault está em [caminho].</code>
+          </article>
+          <article class="request">
+            <h3>SIM</h3>
+            <p class="when">Use quando tiver uma solicitação de mudança e quiser registrar seu impacto esperado, sem implementar nada.</p>
+            <code>Use a SIM para analisar esta solicitação de mudança e atualizar o conhecimento esperado no Obsidian: [cole aqui a solicitação].</code>
+          </article>
+          <article class="request">
+            <h3>FIO</h3>
+            <p class="when">Use quando a mudança já estiver pronta para ser esclarecida, planejada, implementada e validada.</p>
+            <code>Use a FIO para implementar esta feature: [descreva a mudança]. Confirme o escopo comigo antes de começar a implementação.</code>
+          </article>
+          <article class="request">
+            <h3>CIM</h3>
+            <p class="when">Use quando quiser acompanhar a mesma mudança do pedido inicial até a confirmação no repositório.</p>
+            <code>Use a CIM para conduzir esta solicitação de mudança de ponta a ponta: [cole aqui a solicitação]. O projeto está em [caminho] e o vault está em [caminho]. Para continuar depois, peça para retomar a mesma mudança.</code>
+          </article>
+          <article class="request cim-request">
+            <h3>Escolha rápida</h3>
+            <p class="when">DIO para entender o que existe. SIM para registrar o que se espera mudar. FIO para implementar uma mudança. CIM para conduzir o ciclo completo entre as três.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="status" aria-labelledby="status-title">
+        <h2 id="status-title">Status atual da integração</h2>
+        <p>As responsabilidades, os contratos formais de handoff e a retomada persistente já estão alinhados. A CIM mantém a trilha da mudança e conduz o ciclo de ponta a ponta de forma auditável, sem tirar a autonomia de uso individual de SIM, FIO e DIO.</p>
+      </section>
+
+      <footer>Documento de referência do conjunto de skills: SIM, CIM, FIO e DIO.</footer>
+    </main>
+  </body>
+</html>

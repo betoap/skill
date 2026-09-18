@@ -36,3 +36,7 @@ Inclua matriz requisito → cenário → teste → evidência → status, result
 ## Relatório de entrega
 
 Produzido pela ChefIA somente após o double check de entrega. Registre a versão da especificação conferida, o relatório de validação técnica da ConfIA e os checklists finalizados consultados, a confirmação de que não há pendências obrigatórias ou tasks abertas, o resultado `approved` ou `blocked`, achados e a comunicação final. Um relatório `blocked` não é entrega concluída e deve indicar o retorno necessário.
+
+## Evidência de entrega para a CIM
+
+Quando a execução estiver vinculada a uma CIM, registre um handoff com o `cycle_id` compartilhado, referência ao contexto recebido da SIM, escopo implementado e não implementado, relatório de validação técnica, evidências de execução e entrega, limitações, pendências e referências ao plano-mestre e às tasks. Sem ciclo identificado, este artefato não é produzido nem encaminhado à DIO.

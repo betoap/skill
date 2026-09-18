@@ -6,6 +6,7 @@ demand:
   entry_node: ""
   current_node: ""
   status: active
+  cycle_id: ""
 skill:
   name: fio
   version: ""
@@ -24,3 +25,4 @@ transitions:
     invalidated_artifacts: []
 blockers: []
 unknowns: []
+coordinated_handoff: null

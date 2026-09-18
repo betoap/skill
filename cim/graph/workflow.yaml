@@ -1,0 +1,57 @@
+version: 1
+name: cim
+state_file: .cim/workflow-state.yaml
+contracts: graph/artifact-contracts.md
+evidence_protocol: graph/evidence-protocol.md
+
+nodes:
+  cycle_intake:
+    skill: cim
+    phase: cycle_intake
+    input: [change_request_text]
+    output: [cycle_record, cycle_identifier]
+  sim_handoff:
+    skill: sim
+    phase: sim_handoff
+    input: [cycle_record, cycle_identifier]
+    output: [sim_change_context]
+  fio_handoff:
+    skill: fio
+    phase: fio_handoff
+    input: [sim_change_context, cycle_identifier]
+    output: [fio_delivery_evidence]
+  dio_revalidation:
+    skill: dio
+    phase: dio_revalidation
+    input: [fio_delivery_evidence, sim_change_context, cycle_identifier]
+    output: [dio_as_is_revalidation]
+  cycle_closure:
+    skill: cim
+    phase: cycle_closure
+    input: [cycle_record, sim_change_context, fio_delivery_evidence, dio_as_is_revalidation]
+    output: [cycle_report, updated_request_history]
+
+edges:
+  - { from: cycle_intake, to: sim_handoff, when: cycle_identified_and_request_recorded }
+  - { from: sim_handoff, to: fio_handoff, when: sim_context_complete_and_ready_for_implementation }
+  - { from: sim_handoff, to: cycle_intake, when: request_scope_or_identity_requires_clarification }
+  - { from: fio_handoff, to: dio_revalidation, when: delivery_technically_validated_with_evidence }
+  - { from: fio_handoff, to: sim_handoff, when: scope_or_expected_knowledge_requires_revision }
+  - { from: fio_handoff, to: cycle_intake, when: request_clarification_required }
+  - { from: dio_revalidation, to: cycle_closure, when: as_is_revalidation_recorded }
+  - { from: dio_revalidation, to: fio_handoff, when: implementation_not_confirmed_and_corrective_delivery_required }
+  - { from: dio_revalidation, to: sim_handoff, when: expected_knowledge_requires_revision }
+
+invariants:
+  - Every cycle has one stable identifier present in every handoff and linked artifact.
+  - CIM coordinates SIM, FIO and DIO but does not perform their specialized responsibilities.
+  - A SIM handoff contains source request, expected knowledge, impact, certainty, decisions, pending items and traceable links.
+  - A FIO handoff contains the implemented and unimplemented scope, technical validation, delivery evidence, limitations and pending items.
+  - A DIO handoff contains repository evidence, result for expected knowledge evaluated and baseline AS-IS update or preservation.
+  - FIO cannot start without a valid SIM handoff, except for explicitly recorded partial entry with risks.
+  - DIO cannot confirm a cycle without validated FIO delivery, except for explicitly recorded independent repository evidence.
+  - A cycle cannot be marked confirmed_as_is without observable DIO revalidation of the repository.
+  - Partial, nao_confirmada and blocked outcomes preserve pending expected knowledge and declare a return path.
+  - Every transition records guard evidence, invalidated handoffs, next responsible skill and blockers.
+  - Reexecution reconciles the existing cycle and never duplicates histories, plans, links or vault updates.
+  - Secrets and credentials are never stored in state, handoffs, evidence or reports.

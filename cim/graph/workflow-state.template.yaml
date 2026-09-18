@@ -1,0 +1,21 @@
+skill_name: cim
+skill_version: 1.0.1
+skill_source: null
+cycle_id: null
+change_request_id: null
+project_path: null
+vault_path: null
+current_node: cycle_intake
+status: recebida
+entry_mode: new
+skill_sources:
+  sim: null
+  fio: null
+  dio: null
+handoffs: []
+transitions: []
+evidence: []
+pending_items: []
+blockers: []
+returns: []
+cycle_history: []

@@ -1,0 +1,60 @@
+version: 1
+name: sim
+state_file: .sim/workflow-state.yaml
+contracts: graph/artifact-contracts.md
+evidence_protocol: graph/evidence-protocol.md
+
+nodes:
+  request_intake:
+    skill: sim
+    phase: request_intake
+    input: [change_request_text]
+    output: [request_record, interpretation_scope]
+  request_interpretation:
+    skill: sim
+    phase: request_interpretation
+    input: [request_record, interpretation_scope]
+    output: [candidate_knowledge]
+  impact_analysis:
+    skill: sim
+    phase: impact_analysis
+    input: [candidate_knowledge, vault_context]
+    output: [impact_register, consolidation_proposal, validated_proposal, recorded_decisions]
+  human_validation:
+    skill: sim
+    phase: human_validation
+    input: [impact_register, consolidation_proposal]
+    output: [validated_proposal, recorded_decisions]
+  incremental_consolidation:
+    skill: sim
+    phase: incremental_consolidation
+    input: [consolidation_proposal, validated_proposal, recorded_decisions]
+    output: [expected_knowledge_update, request_history, consolidation_report]
+  cim_handoff:
+    skill: sim
+    phase: cim_handoff
+    input: [expected_knowledge_update, request_history, consolidation_report]
+    output: [sim_change_context]
+
+edges:
+  - { from: request_intake, to: request_interpretation, when: request_recorded_and_scope_known }
+  - { from: request_interpretation, to: impact_analysis, when: candidate_knowledge_identified }
+  - { from: impact_analysis, to: human_validation, when: ambiguity_or_material_divergence_requires_decision }
+  - { from: impact_analysis, to: incremental_consolidation, when: proposal_is_clear }
+  - { from: human_validation, to: incremental_consolidation, when: decision_recorded }
+  - { from: human_validation, to: request_interpretation, when: request_interpretation_requires_revision }
+  - { from: human_validation, to: impact_analysis, when: impact_classification_requires_revision }
+  - { from: incremental_consolidation, to: cim_handoff, when: cycle_id_present_and_sim_context_complete }
+
+invariants:
+  - A change request is treated as unstructured text; absent fields are not invented.
+  - Every material statement has both an impact type and a certainty classification, with traceable evidence or an explicit unknown.
+  - Clear proposed changes may be consolidated as expected or planned knowledge without mandatory human confirmation.
+  - Ambiguity, multiple plausible interpretations or material divergence require human validation before consolidation.
+  - A change request cannot create, alter, remove or promote AS-IS knowledge; only later observable repository evidence assessed by DIO can do so.
+  - Every consolidated change preserves a traceable link to its source request and has a separate request-history record.
+  - Reexecution of the same request reconciles its previous record and does not duplicate history or knowledge.
+  - Vault notes contain project knowledge, not copied implementation details or an unstructured backlog log.
+  - Secrets and credentials are never stored in state, history, evidence or vault notes.
+  - A node can complete only when all declared output artifacts exist and their evidence is recorded.
+  - When cycle_id is present, incremental consolidation records a SIM-to-CIM change-context handoff that satisfies the CIM artifact contract; when absent, no handoff is created or forwarded.

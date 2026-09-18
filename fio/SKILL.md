@@ -1,6 +1,6 @@
 ---
 name: fio
-version: 1.2.0
+version: 1.2.1
 description: Fluxo de Implementação Orientada para conduzir uma feature da descoberta à validação final, combinando arquitetura, TDD, implementação e controle de evidências. Use para executar ou retomar o fluxo completo de uma feature.
 
 author:
@@ -65,6 +65,12 @@ Quando houver duas ou mais tasks independentes e a plataforma suportar agentes, 
 Cada fase mantém um agente coordenador responsável por consolidar os resultados, verificar as evidências, resolver conflitos e atualizar a task, o plano-mestre e o estado. Agentes delegados não concluem tasks, não marcam checks globais e não autorizam transições: eles devolvem alterações, testes e evidências ao coordenador. A ConfIA que faz a validação final deve permanecer independente da implementação que está aprovando.
 
 Use paralelismo apenas quando as dependências declaradas permitirem. Se o resultado de uma frente alterar o contrato, os requisitos, a arquitetura, a matriz de testes ou os arquivos de outra frente, interrompa as frentes afetadas, reconcilie o plano e retome somente depois da atualização correspondente.
+
+## Integração opcional pela CIM
+
+Por padrão, a FIO recebe uma demanda diretamente, executa seu fluxo completo e encerra com o relatório de entrega. Ela não aciona a DIO automaticamente.
+
+Quando for acionada pela CIM, receba o **contexto da mudança** da SIM e o `cycle_id` compartilhado. Registre-os como contexto de entrada, sem pular a descoberta nem substituir a confirmação de escopo pela ChefIA. Após o double check da ChefIA, produza a **evidência de entrega** para a CIM encaminhar à DIO: escopo implementado e não implementado, relatório de validação técnica, evidências de execução e entrega, limitações, pendências e referências ao plano-mestre e às tasks. Só registre esse handoff quando houver ciclo CIM identificado; ele não prova AS-IS por si só.
 
 ## Recursos operacionais
 

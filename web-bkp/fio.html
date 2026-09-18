@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FIO — Fluxo de Implementação Orientada</title><link rel="stylesheet" href="../skills.css"></head>
+  <body style="--accent:#047857;--accent-soft:#e9f8f1"><main>
+    <a class="back" href="skills-overview.html">← Voltar para a visão geral</a>
+    <div class="eyebrow">FIO</div><h1>Fluxo de Implementação Orientada</h1>
+    <p class="lead">A FIO conduz uma feature da descoberta à entrega, usando arquitetura, TDD, implementação e validação independente.</p>
+    <section class="hero"><p><strong>Por que foi criada:</strong> implementar uma demanda sem escopo confirmado, plano, testes e evidências cria risco. A FIO organiza essas etapas e impede que uma aprovação seja baseada apenas em sensação ou testes verdes isolados.</p></section>
+    <h2>Os quatro papéis internos</h2><div class="grid"><article class="card"><h3>ChefIA</h3><p>Confirma a especificação, coordena as etapas e faz o double check final de entrega.</p></article><article class="card"><h3>MaestrIA</h3><p>Analisa a arquitetura, registra o stack e cria as tasks rastreáveis.</p></article><article class="card"><h3>ConfIA</h3><p>Desenha testes TDD e faz a validação técnica independente.</p></article><article class="card"><h3>CodIA</h3><p>Implementa cada task conforme o plano e as evidências exigidas.</p></article></div>
+    <h2>Como funciona</h2><div class="flow"><span>ChefIA</span><b>→</b><span>MaestrIA</span><b>→</b><span>ConfIA: TDD</span><b>→</b><span>CodIA</span><b>→</b><span>ConfIA: validação</span><b>→</b><span>ChefIA</span></div><div class="steps"><article class="step"><h3>Confirmar o escopo</h3><p>A ChefIA entrevista o solicitante, registra requisitos e critérios de aceite no plano-mestre.</p></article><article class="step"><h3>Planejar e testar</h3><p>A MaestrIA cria tasks e a ConfIA produz testes que falham pelo motivo esperado.</p></article><article class="step"><h3>Implementar com evidência</h3><p>A CodIA implementa o mínimo necessário, em contexto isolado, e registra comandos e resultados.</p></article><article class="step"><h3>Validar e entregar</h3><p>A ConfIA revisa de forma independente; a ChefIA só conclui após o double check de integridade.</p></article></div>
+    <h2>Quando participa da CIM</h2><p>Somente dentro de um ciclo CIM, a FIO produz a evidência interna <code>fio_delivery_evidence</code> depois do double check final. A CIM a localiza e encaminha à DIO; quem usa a FIO não precisa criar ou transportar esse artefato.</p>
+    <h2>Exemplo de solicitação</h2><article class="example"><blockquote>Use a FIO para implementar esta feature: “Permitir que o cliente cancele um pedido em até 15 minutos após a confirmação”. Confirme o escopo comigo antes de começar.</blockquote><p>A FIO cria o plano-mestre, tasks, matriz de testes e evidências de entrega. Se houver ambiguidade, ela pergunta antes de implementar.</p></article>
+    <section class="limits"><h2>Limite principal</h2><p>A FIO implementa e valida tecnicamente, mas não decide sozinha que o conhecimento do Obsidian passou a representar o AS-IS. Essa confirmação pertence à DIO.</p></section>
+    <footer>Integração no ciclo: CIM → SIM → FIO → DIO.</footer>
+  </main></body>
+</html>

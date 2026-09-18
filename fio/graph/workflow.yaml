@@ -35,6 +35,11 @@ nodes:
     phase: chefia_delivery
     input: [approved_specification, master_plan_checklist, task_checklists, validation_report, technically_validated_checklist]
     output: [delivery_report, finalized_checklist, next_steps]
+  cim_handoff:
+    skill: fio
+    phase: cim_handoff
+    input: [delivery_report, finalized_checklist, next_steps]
+    output: [fio_delivery_evidence]
 
 edges:
   - { from: chefia_discovery, to: maestria_architecture, when: specification_confirmed }
@@ -50,6 +55,7 @@ edges:
   - { from: confia_validation, to: codia_implementation, when: implementation_correction_required }
   - { from: confia_validation, to: maestria_architecture, when: architecture_correction_required }
   - { from: confia_validation, to: chefia_discovery, when: specification_clarification_required }
+  - { from: chefia_delivery, to: cim_handoff, when: cycle_id_present_and_delivery_evidence_complete }
 
 invariants:
   - A node starts only when every declared input artifact is present, current and passes its contract.
@@ -76,3 +82,4 @@ invariants:
   - Every CodIA task runs in a distinct isolated execution context recorded in workstreams with its task, authorized files or modules and dependencies. If isolation is unavailable, CodIA records the limitation, runs one task at a time and does not parallelize.
   - When two or more CodIA tasks are independent and agents are available, each task is assigned to a separate agent or isolated context before implementation begins.
   - Parallel work must not overlap files, tasks or checklist ownership unless an explicit integration plan exists; a worker may not approve its own implementation.
+  - When demand.cycle_id is present, ChefIA delivery records a FIO-to-CIM delivery-evidence handoff that satisfies the CIM artifact contract; when absent, no handoff is created or forwarded.

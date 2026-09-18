@@ -1,0 +1,63 @@
+version: 1
+name: dio
+state_file: .dio/workflow-state.yaml
+contracts: graph/artifact-contracts.md
+evidence_protocol: graph/evidence-protocol.md
+
+nodes:
+  discovery:
+    skill: dio
+    phase: discovery
+    input: [project_source]
+    output: [analysis_scope, source_inventory]
+  as_is_analysis:
+    skill: dio
+    phase: as_is_analysis
+    input: [analysis_scope, source_inventory]
+    output: [as_is_findings, preliminary_knowledge]
+  source_confrontation:
+    skill: dio
+    phase: source_confrontation
+    input: [as_is_findings, preliminary_knowledge]
+    output: [divergence_register, validation_questionnaire, validated_knowledge, recorded_decisions]
+  human_validation:
+    skill: dio
+    phase: human_validation
+    input: [preliminary_knowledge, divergence_register, validation_questionnaire]
+    output: [validated_knowledge, recorded_decisions]
+  obsidian_consolidation:
+    skill: dio
+    phase: obsidian_consolidation
+    input: [validated_knowledge, recorded_decisions]
+    output: [vault_baseline, consolidation_report]
+  cim_handoff:
+    skill: dio
+    phase: cim_handoff
+    input: [vault_baseline, consolidation_report]
+    output: [dio_as_is_revalidation]
+
+edges:
+  - { from: discovery, to: as_is_analysis, when: scope_and_sources_recorded }
+  - { from: as_is_analysis, to: source_confrontation, when: as_is_evidence_sufficient }
+  - { from: source_confrontation, to: human_validation, when: material_divergence_or_confirmation_required }
+  - { from: source_confrontation, to: obsidian_consolidation, when: no_human_validation_required }
+  - { from: human_validation, to: obsidian_consolidation, when: decisions_recorded }
+  - { from: human_validation, to: as_is_analysis, when: additional_project_evidence_required }
+  - { from: human_validation, to: source_confrontation, when: interpretation_requires_reconciliation }
+  - { from: obsidian_consolidation, to: human_validation, when: validated_note_conflict_detected }
+  - { from: obsidian_consolidation, to: cim_handoff, when: cycle_id_present_and_as_is_revalidation_complete }
+
+invariants:
+  - The project source is mandatory; additional documents and free-text context are optional sources that must be identified separately.
+  - Every material statement is classified as observed, inferred, confirmed or a_confirmar and has traceable evidence or an explicit unknown.
+  - The AS-IS is derived from observable project behavior and is never silently conflated with expected product behavior.
+  - Change requests and acceptance criteria may establish expected or planned knowledge, but cannot alter, remove or promote AS-IS knowledge without later observable repository evidence.
+  - A divergence is not resolved without a recorded human interpretation, unless evidence shows the sources are not actually in conflict.
+  - The skill must not automatically change application code to resolve an AS-IS versus expected divergence.
+  - Vault notes contain project knowledge, not implementation-level inventories or copied source code details.
+  - No vault note is created empty, duplicated, or silently overwritten when it contains validated human knowledge.
+  - execution_mode defaults to incremental; explicit_rebuild requires written user authorization, identified vault or scope, and an evidence record before any note is replaced.
+  - explicit_rebuild reanalyzes project sources without reusing the prior baseline as knowledge input and changes only DIO notes within the authorized scope.
+  - Secrets and credentials are never stored in state, reports, evidence or vault notes.
+  - A node can complete only when all declared output artifacts exist and their evidence is recorded.
+  - When cycle_id is present, Obsidian consolidation records a DIO-to-CIM AS-IS revalidation handoff that satisfies the CIM artifact contract; when absent, no handoff is created or forwarded.
