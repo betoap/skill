@@ -1,6 +1,6 @@
 ---
 name: fio
-version: 1.1.0
+version: 1.2.0
 description: Fluxo de Implementação Orientada para conduzir uma feature da descoberta à validação final, combinando arquitetura, TDD, implementação e controle de evidências. Use para executar ou retomar o fluxo completo de uma feature.
 
 author:
@@ -56,9 +56,11 @@ ChefIA → MaestrIA → ConfIA (testes TDD) → CodIA → ConfIA (validação fi
 
 Em qualquer retorno, percorra somente a aresta de retorno aplicável, invalide apenas os artefatos afetados e reabra os checks correspondentes. Não declare uma aprovação baseada apenas em testes verdes: mantenha a rastreabilidade `REQ-n → cenário → TEST-n → evidência`, a revisão final independente da ConfIA contra a especificação aprovada e o double check de entrega da ChefIA antes de comunicar sucesso.
 
-## Trabalho paralelo em CodIA e ConfIA
+## Contextos isolados e trabalho paralelo
 
-CodIA e ConfIA podem usar múltiplos agentes para acelerar trabalho independente. Antes de delegar, divida por task, módulo, arquivo ou conjunto de cenários sem sobreposição e registre no estado o responsável, escopo e dependências de cada frente. Não delegue em paralelo mudanças no mesmo arquivo, na mesma task ou no mesmo check sem um plano explícito de integração.
+Cada task de implementação deve ser executada em contexto isolado — por exemplo, sessão, agente, worktree ou ambiente equivalente — separado de qualquer outra task. Antes de iniciar, CodIA registra no estado a task, o contexto atribuído, os arquivos ou módulos permitidos e suas dependências. Se a plataforma não oferecer contexto isolado, registre essa limitação, execute uma única task por vez e bloqueie qualquer paralelismo.
+
+Quando houver duas ou mais tasks independentes e a plataforma suportar agentes, CodIA deve distribuí-las entre múltiplos agentes. Antes de delegar, divida por task, módulo, arquivo ou conjunto de cenários sem sobreposição e registre no estado o responsável, escopo e dependências de cada frente. Não delegue em paralelo mudanças no mesmo arquivo, na mesma task ou no mesmo check sem um plano explícito de integração.
 
 Cada fase mantém um agente coordenador responsável por consolidar os resultados, verificar as evidências, resolver conflitos e atualizar a task, o plano-mestre e o estado. Agentes delegados não concluem tasks, não marcam checks globais e não autorizam transições: eles devolvem alterações, testes e evidências ao coordenador. A ConfIA que faz a validação final deve permanecer independente da implementação que está aprovando.
 

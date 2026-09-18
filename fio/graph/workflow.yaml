@@ -73,4 +73,6 @@ invariants:
   - Approval requires complete requirement-to-test traceability and an independent final review against the approved specification.
   - Delivery requires a ChefIA double check confirming ConfIA technical approval, complete evidence, scope integrity and no material blocker. Only after that check may ChefIA promote remaining mandatory task checks to validated and communicate success.
   - CodIA and ConfIA may delegate independent work in parallel, but a phase coordinator must record ownership and scope, integrate outputs, reconcile shared artifacts and update the authoritative checklists and state.
+  - Every CodIA task runs in a distinct isolated execution context recorded in workstreams with its task, authorized files or modules and dependencies. If isolation is unavailable, CodIA records the limitation, runs one task at a time and does not parallelize.
+  - When two or more CodIA tasks are independent and agents are available, each task is assigned to a separate agent or isolated context before implementation begins.
   - Parallel work must not overlap files, tasks or checklist ownership unless an explicit integration plan exists; a worker may not approve its own implementation.
