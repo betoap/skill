@@ -24,6 +24,8 @@ O foco é conhecimento de projeto:
 - comportamentos esperados, quando conhecidos;
 - incertezas e divergências.
 
+Para regras materiais, a DIO documenta gatilho, pré-condições, decisão, exceções, efeito no produto e evidência. Para cada integração externa relevante, documenta propósito de negócio, momento de chamada, regras, resultados, impacto no fluxo e recuperação observável, sem publicar detalhes técnicos ou dados sensíveis.
+
 ### Regra fundamental
 
 O código é a fonte de verdade do AS-IS. Isso não significa que ele está correto do ponto de vista de produto. Diferenciar sempre AS-IS e esperado.

@@ -70,6 +70,8 @@ Com base no plano-mestre e na arquitetura existente, ela cria as tasks em `/plan
 
 Antes de avançar, a MaestrIA registra decisões e evidências, confirma que todos os links de task existem e marca o check de arquitetura e plano em cada task como `implementado`.
 
+Quando uma decisão arquitetural alterar comportamento percebido, restrição relevante, integração, consistência de dados, desempenho ou limitação operacional, a FIO registra contexto, decisão, alternativas, justificativa, efeitos esperados, riscos, requisitos ou tasks afetados e evidência. A DIO só documenta o efeito de produto depois de confirmá-lo no repositório.
+
 ## Testes TDD — ConfIA
 
 Antes de implementar, a ConfIA cria uma matriz de rastreabilidade `REQ-n → cenário → TEST-n`, cobrindo cenários positivos, negativos, de borda, segurança e integração quando aplicáveis.

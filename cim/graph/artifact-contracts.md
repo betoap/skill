@@ -10,6 +10,8 @@ Todo artefato usa identificador estável, produtor, status (`draft`, `current`, 
 - referências verificáveis para SIM, FIO e DIO;
 - relação com ciclos anteriores, quando houver.
 - modo de entrada: `new`, `resume` ou `assumed_partial`; uma entrada parcial registra dependências e riscos.
+- alvo de confirmação: `repositorio`, `homologacao` ou `producao`, evidência disponível e maior estágio confirmado.
+- para cada pendência ou bloqueio: responsável, próxima ação e data ou condição de revisão.
 
 ## Handoff da SIM
 

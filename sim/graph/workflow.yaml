@@ -49,6 +49,7 @@ edges:
 invariants:
   - A change request is treated as unstructured text; absent fields are not invented.
   - Every material statement has both an impact type and a certainty classification, with traceable evidence or an explicit unknown.
+  - Every material change records applicable impact dimensions (functional, data, integration, security and experience) or an explicit unknown; this classification informs downstream planning and validation.
   - Clear proposed changes may be consolidated as expected or planned knowledge without mandatory human confirmation.
   - Ambiguity, multiple plausible interpretations or material divergence require human validation before consolidation.
   - A change request cannot create, alter, remove or promote AS-IS knowledge; only later observable repository evidence assessed by DIO can do so.

@@ -1,6 +1,6 @@
 ---
 name: fio
-version: 1.2.1
+version: 1.2.2
 description: Fluxo de Implementação Orientada para conduzir uma feature da descoberta à validação final, combinando arquitetura, TDD, implementação e controle de evidências. Use para executar ou retomar o fluxo completo de uma feature.
 
 author:
@@ -71,6 +71,10 @@ Use paralelismo apenas quando as dependências declaradas permitirem. Se o resul
 Por padrão, a FIO recebe uma demanda diretamente, executa seu fluxo completo e encerra com o relatório de entrega. Ela não aciona a DIO automaticamente.
 
 Quando for acionada pela CIM, receba o **contexto da mudança** da SIM e o `cycle_id` compartilhado. Registre-os como contexto de entrada, sem pular a descoberta nem substituir a confirmação de escopo pela ChefIA. Após o double check da ChefIA, produza a **evidência de entrega** para a CIM encaminhar à DIO: escopo implementado e não implementado, relatório de validação técnica, evidências de execução e entrega, limitações, pendências e referências ao plano-mestre e às tasks. Só registre esse handoff quando houver ciclo CIM identificado; ele não prova AS-IS por si só.
+
+## Decisões arquiteturais com efeito de produto
+
+Quando uma decisão arquitetural introduzir ou alterar comportamento percebido, restrição relevante, integração, consistência de dados, desempenho ou limitação operacional, a MaestrIA deve criar um registro rastreável de decisão. Registre contexto, decisão, alternativas relevantes, justificativa, efeitos de produto esperados, riscos, requisitos ou tasks afetados e evidência. A DIO usa apenas os efeitos confirmados no repositório; ela não reproduz a decisão técnica como documentação de produto.
 
 ## Recursos operacionais
 

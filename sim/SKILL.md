@@ -1,6 +1,6 @@
 ---
 name: sim
-version: 1.0.1
+version: 1.0.2
 description: Interpreta uma solicitação de mudança e incrementa o conhecimento esperado do produto no Obsidian, com análise de impacto e rastreabilidade. Use para consolidar mudanças propostas; não use para criar ou alterar a baseline AS-IS, implementar código ou operar um sistema de gestão de demandas.
 
 author:
@@ -34,6 +34,7 @@ Uma solicitação não é evidência de que o comportamento atual já mudou. Por
 - Extraia somente conhecimento de produto: regras de negócio, fluxos, atores, conceitos, integrações e comportamentos descritos ou sugeridos.
 - Não documente classes, métodos, funções, testes, lint ou detalhes de implementação.
 - Classifique o impacto em `novo`, `complementa`, `altera`, `remove`, `divergência` ou `dúvida`.
+- Para cada alteração material, classifique também as dimensões afetadas: `funcional`, `dados`, `integração`, `segurança` e `experiência`. Marque apenas as dimensões sustentadas pela solicitação ou pela evidência; ausência de informação permanece como `a_confirmar`.
 - Classifique também cada afirmação material como `observado`, `inferido`, `confirmado` ou `a_confirmar`; o tipo de impacto não substitui a classificação de certeza.
 - Não trate uma mudança claramente descrita como conflito apenas por ser nova. Validação humana é necessária somente para ambiguidade real, mais de uma interpretação plausível ou divergência material.
 - Não invente intenção, regra ou comportamento ausente da solicitação e do conhecimento disponível.

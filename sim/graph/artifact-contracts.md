@@ -14,6 +14,7 @@ Todo artefato usa identificador estável, produtor, status (`draft`, `current`, 
 
 - regras de negócio, fluxos, atores, conceitos, integrações e comportamentos de produto identificados;
 - tipo de impacto: `novo`, `complementa`, `altera`, `remove`, `divergência` ou `dúvida`;
+- dimensões de impacto aplicáveis: `funcional`, `dados`, `integração`, `segurança` e `experiência`, com evidência ou indicação `a_confirmar`;
 - classificação de certeza: `observado`, `inferido`, `confirmado` ou `a_confirmar`;
 - notas, conceitos ou conhecimentos relacionados consultados;
 - distinção explícita entre comportamento atual, esperado e incerto.

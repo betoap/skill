@@ -1,5 +1,5 @@
 skill_name: dio
-skill_version: 1.0.1
+skill_version: 1.0.3
 skill_source: null
 request_id: null
 cycle_id: null
@@ -13,6 +13,7 @@ explicit_rebuild_scope: []
 sources: []
 artifacts: []
 findings: []
+integration_register: []
 divergences: []
 human_decisions: []
 vault_notes: []

@@ -12,6 +12,7 @@ skill:
   version: ""
   source: ""
 artifacts: []
+architecture_decisions: []
 requirements: []
 tasks: []
 checks: []

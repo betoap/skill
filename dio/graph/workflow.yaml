@@ -14,11 +14,11 @@ nodes:
     skill: dio
     phase: as_is_analysis
     input: [analysis_scope, source_inventory]
-    output: [as_is_findings, preliminary_knowledge]
+    output: [as_is_findings, preliminary_knowledge, integration_register]
   source_confrontation:
     skill: dio
     phase: source_confrontation
-    input: [as_is_findings, preliminary_knowledge]
+    input: [as_is_findings, preliminary_knowledge, integration_register]
     output: [divergence_register, validation_questionnaire, validated_knowledge, recorded_decisions]
   human_validation:
     skill: dio
@@ -60,4 +60,5 @@ invariants:
   - explicit_rebuild reanalyzes project sources without reusing the prior baseline as knowledge input and changes only DIO notes within the authorized scope.
   - Secrets and credentials are never stored in state, reports, evidence or vault notes.
   - A node can complete only when all declared output artifacts exist and their evidence is recorded.
+  - AS-IS analysis cannot complete without an integration register: it documents each relevant external interaction using its business purpose, trigger, rules, outcomes and evidence, or explicitly records that no relevant external interaction was found.
   - When cycle_id is present, Obsidian consolidation records a DIO-to-CIM AS-IS revalidation handoff that satisfies the CIM artifact contract; when absent, no handoff is created or forwarded.

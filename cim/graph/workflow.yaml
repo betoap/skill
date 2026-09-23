@@ -51,7 +51,9 @@ invariants:
   - FIO cannot start without a valid SIM handoff, except for explicitly recorded partial entry with risks.
   - DIO cannot confirm a cycle without validated FIO delivery, except for explicitly recorded independent repository evidence.
   - A cycle cannot be marked confirmed_as_is without observable DIO revalidation of the repository.
+  - The cycle record declares its confirmation target (repository, homologation or production) and never claims a higher stage without compatible observable evidence.
   - Partial, nao_confirmada and blocked outcomes preserve pending expected knowledge and declare a return path.
+  - Every pending item or blocker records an owner, next action and review date or condition.
   - Every transition records guard evidence, invalidated handoffs, next responsible skill and blockers.
   - Reexecution reconciles the existing cycle and never duplicates histories, plans, links or vault updates.
   - Secrets and credentials are never stored in state, handoffs, evidence or reports.

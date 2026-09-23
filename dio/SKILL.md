@@ -1,6 +1,6 @@
 ---
 name: dio
-version: 1.0.1
+version: 1.0.3
 description: Analisa um projeto existente e cria ou atualiza uma baseline AS-IS de conhecimento no Obsidian, distinguindo fatos observados, inferências, confirmações e pontos a confirmar. Use para bootstrap de conhecimento de projeto; não use para implementar funcionalidades ou documentar detalhes de código.
 
 author:
@@ -28,6 +28,9 @@ Defina os limites do trabalho antes da análise: projeto, caminho do vault, docu
 - Trate o comportamento observável no projeto como AS-IS, não como confirmação de que o produto está correto.
 - Diferencie sempre o que existe do que deveria existir, do que é inferido e do que ainda não é conhecido.
 - Classifique cada afirmação material como `observado`, `inferido`, `confirmado` ou `a_confirmar`.
+- Documente regras de negócio de forma explícita: gatilho, pré-condições, decisão, exceções, efeito no produto e evidência. Não se limite a dizer que uma funcionalidade “faz” algo.
+- Para cada interação externa relevante, documente o sistema ou domínio integrado, propósito de negócio, momento em que é acionada, dados de negócio trocados, resultado esperado, regras, falhas relevantes e impacto para usuário ou processo. Não copie endpoints, credenciais, payloads sensíveis ou detalhes internos de implementação.
+- Quando receber uma decisão arquitetural da FIO, documente somente o efeito de produto que esteja confirmado por evidência observável; mantenha o efeito como `a_confirmar` se a implementação não o sustentar.
 - Não transforme inferências em fatos automaticamente. Quando faltarem evidências, use `A_CONFIRMAR` ou `INFERIDO` de forma explícita.
 - Confronte código, documentação adicional e contexto fornecido. Não tente reconstruir a intenção original sem base observável.
 - Não pergunte qual é o AS-IS quando ele puder ser observado. Pergunte ao usuário somente como interpretar divergências materiais ou lacunas que bloqueiem a consolidação.
@@ -41,6 +44,7 @@ Quando uma fonte descreve uma mudança futura, mantenha-a vinculada à sua orige
 ## Roteamento por fase
 
 - Para inventariar fontes, delimitar escopo e produzir conhecimento preliminar, siga [análise AS-IS](references/analise-asis.md).
+- Para identificar e documentar integrações externas como comportamento de produto, siga [integrações externas](references/integracoes-externas.md).
 - Para confrontar fontes e conduzir a validação humana de divergências, siga [confronto e validação](references/confronto-validacao.md).
 - Para organizar e publicar conhecimento no vault sem duplicação, siga [consolidação no Obsidian](references/consolidacao-obsidian.md).
 

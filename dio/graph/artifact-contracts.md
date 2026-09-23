@@ -13,12 +13,18 @@ Todo artefato usa identificador estável, produtor, status (`draft`, `current`, 
 ## Achados AS-IS e conhecimento preliminar
 
 - finalidade, atores, funcionalidades, regras de negócio, fluxos, conceitos, integrações e arquitetura em alto nível, quando houver evidência;
+- para cada regra material: gatilho, pré-condições, decisão, exceções, efeito no produto e evidência;
+- para cada integração externa relevante: sistema ou domínio integrado, propósito de negócio, gatilho, regras e pré-condições, categorias de informação trocada, resultados possíveis, impacto no fluxo, recuperação quando observável e classificação de certeza;
 - comportamento observável e a fonte que o sustenta;
 - classificação `observado`, `inferido`, `confirmado` ou `a_confirmar` por afirmação material;
 - limitações da análise e itens ainda desconhecidos;
 - distinção explícita entre AS-IS e esperado quando ambos forem conhecidos.
 
 Quando o esperado vier de uma solicitação de mudança, registre também sua origem e vínculo rastreável. Esse vínculo não permite promover, remover ou alterar o AS-IS sem evidência posterior no repositório.
+
+Não registre endpoints privados, credenciais, tokens, cabeçalhos de autenticação, payloads completos ou detalhes de cliente HTTP como conhecimento de produto.
+
+Decisões arquiteturais recebidas da FIO podem orientar a investigação, mas somente seus efeitos confirmados no produto entram na baseline AS-IS.
 
 ## Registro de divergências e questionário
 

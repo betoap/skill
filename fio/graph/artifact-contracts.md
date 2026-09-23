@@ -23,6 +23,10 @@ Todo artefato usa um identificador estável, produtor, status (`draft`, `current
 
 Para cada `REQ-n`, registre cenários positivos, negativos, bordas, segurança e integração quando aplicáveis. Cada cenário referencia pelo menos um teste (`TEST-n`), e cada teste referencia os requisitos que cobre. Registre também o que não será testado e a justificativa.
 
+## Registro de decisão arquitetural
+
+Para cada decisão com efeito de produto ou limitação operacional relevante, registre contexto, decisão, alternativas relevantes, justificativa, efeitos esperados, riscos, requisitos ou tasks afetados e evidência. Não use esse registro como prova de AS-IS; a confirmação de efeito no produto pertence à DIO.
+
 ## Evidências de teste e implementação
 
 Registre comando ou ação executada, ambiente, resultado observado, data lógica da execução, arquivos envolvidos e vínculo com `TEST-n` ou `TASK-n`. Para testes vermelhos, registre o motivo esperado da falha; para verdes, registre a saída que demonstra sucesso. Uma alegação sem evidência fica como `unknown`, nunca como aprovação.

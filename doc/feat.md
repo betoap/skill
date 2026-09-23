@@ -64,6 +64,8 @@ Consultar o conhecimento relacionado já existente no Obsidian e realizar uma an
 - `divergência`;
 - `dúvida`.
 
+Para cada alteração material, registrar também as dimensões afetadas quando houver evidência: `funcional`, `dados`, `integração`, `segurança` e `experiência`. Uma dimensão sem base permanece `a_confirmar`.
+
 Divergência ou dúvida não é o padrão. A validação humana só é necessária quando houver ambiguidade real ou mais de uma interpretação plausível. Não pedir confirmação por formalidade.
 
 O tipo de impacto não substitui a classificação de certeza. Cada afirmação material também deve ser classificada como `observado`, `inferido`, `confirmado` ou `a confirmar`, conforme a mesma linguagem da baseline AS-IS.

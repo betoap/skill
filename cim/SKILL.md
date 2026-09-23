@@ -1,6 +1,6 @@
 ---
 name: cim
-version: 1.0.1
+version: 1.0.2
 description: Orquestra o ciclo de uma solicitação de mudança entre SIM, FIO e DIO, validando handoffs, rastreabilidade e encerramento após confirmação AS-IS. Use para coordenar uma mudança de ponta a ponta; não use para interpretar, implementar ou revalidar em lugar dessas skills.
 
 author:
@@ -43,6 +43,8 @@ Somente encaminhe uma fase quando o handoff anterior cumprir seu contrato:
 - FIO → DIO: escopo implementado, relatório técnico, evidências de execução e entrega, limitações e pendências;
 - DIO → encerramento: evidência observável do repositório, resultado por item e atualização ou preservação da baseline AS-IS.
 
+Na abertura, registre o alvo de confirmação: `repositorio`, `homologacao` ou `producao`. O padrão é `repositorio`. A CIM não infere confirmação em ambiente superior: cada alvo exige evidência observável compatível, e o resultado final deve informar o maior estágio efetivamente confirmado.
+
 ## Fluxo do ciclo
 
 ```text
@@ -66,6 +68,7 @@ Quando a FIO alterar materialmente o escopo, retorne à SIM ou à etapa de escla
 - Toda transição registra artefato, evidência, itens invalidados, próximo responsável e bloqueios.
 - Ao retomar um ciclo, reconcilie o estado e os handoffs existentes; não duplique planos, histórico, vínculos ou atualizações no vault.
 - Ao assumir uma mudança iniciada fora da CIM, crie ou atualize o estado do ciclo, vincule o resultado existente ao `cycle_id` e valide-o contra o contrato da etapa correspondente antes de avançar. Registre riscos e dependências se a entrada for parcial.
+- Toda pendência, bloqueio ou resultado parcial registra responsável, próxima ação e data ou condição de revisão. Não encerre uma mudança parcial ou bloqueada sem esses campos.
 
 ## Limites
 

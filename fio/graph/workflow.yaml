@@ -67,6 +67,7 @@ invariants:
   - ChefIA discovery creates a draft master plan at `/plan/{demanda}/{demanda}.md` before the first interview question. It cannot transition until that same plan is confirmed, lists every confirmed REQ-n as pending and does not reuse an unrelated document.
   - ChefIA discovery asks one objective question at a time and records each question and answer in the master plan before asking the next; the approved specification preserves that interview record.
   - MaestrIA cannot transition without task checklists at `/plan/{demanda}/taskNN.md`, each linked from the master plan; every REQ-n must be covered by at least one task and every task must expose all mandatory phase checks.
+  - Every architecture decision that changes product behavior, a material constraint, integration, data consistency, performance or an operational limitation is traceable with its rationale, affected requirements or tasks, expected product effect and evidence.
   - A phase, task or delivery cannot be called complete when its corresponding checklist item is absent, stale or lacks observable evidence.
   - When ConfIA rejects a task, it must reopen every invalidated checklist item and its corresponding master-plan task item, then record the failure reason, evidence and responsible corrective action in that task before taking a return edge.
   - A resolved validation failure remains recorded in the task with status resolved; its reason, evidence and responsible corrective action must not be removed.

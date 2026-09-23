@@ -1,5 +1,5 @@
 skill_name: cim
-skill_version: 1.0.1
+skill_version: 1.0.2
 skill_source: null
 cycle_id: null
 change_request_id: null
@@ -8,6 +8,8 @@ vault_path: null
 current_node: cycle_intake
 status: recebida
 entry_mode: new
+confirmation_target: repositorio
+highest_confirmed_stage: null
 skill_sources:
   sim: null
   fio: null

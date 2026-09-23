@@ -112,6 +112,10 @@ Utilizar estados explícitos e rastreáveis:
 
 Uma transição deve registrar o artefato que a sustenta, a evidência observável, os itens invalidados e o próximo responsável.
 
+Na abertura, definir o alvo de confirmação: `repositorio`, `homologacao` ou `producao`; o padrão é `repositorio`. O ciclo informa o maior estágio efetivamente confirmado e nunca declara um ambiente superior sem evidência compatível.
+
+Toda pendência, bloqueio ou resultado parcial deve registrar responsável, próxima ação e data ou condição de revisão.
+
 ## Regras de transição
 
 - Não iniciar a FIO sem contexto mínimo válido da SIM, salvo início parcial explicitamente registrado.
